@@ -319,3 +319,46 @@ programmi = {
 }
 
 # === Selezione e input ===
+pst.write("\n=== Seleziona un programma di calcolo ===")
+lista_programmi = list(programmi.keys())
+for idx, nome_prog in enumerate(lista_programmi, start=1):
+    pst.write(f"[{idx}] {nome_prog}")
+
+if scelta == "":
+    index = 0
+else:
+    try:
+        index = int(scelta) - 1
+    except ValueError:
+        pst.write("❌ Inserisci un numero valido. Esco.")
+        exit()
+
+if index < 0 or index >= len(lista_programmi):
+    pst.write("❌ Selezione fuori range. Esco.")
+    exit()
+
+nome_selezionato = lista_programmi[index]
+programma = programmi[nome_selezionato]
+
+pst.write(f"\n=== Inserisci i dati per '{nome_selezionato}' ===")
+for nome_input in programma["input"]:
+    var = defaults[nome_input]
+    if valore != "":
+        try:
+            var.valore = float(valore)
+        except ValueError:
+            pst.write(f"⚠️ Valore non valido per {nome_input}, mantenuto il precedente.")
+
+# === Esecuzione ===
+pst.write(f"\n⚙️ Eseguo: {nome_selezionato}")
+programma["funzione"](defaults)
+
+
+
+# === Salvataggio ===
+with open(file_input, "w") as f:
+    json.dump({k: v.valore for k, v in defaults.items()}, f, indent=4)
+
+
+
+
