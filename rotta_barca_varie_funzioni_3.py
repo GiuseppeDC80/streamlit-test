@@ -96,10 +96,14 @@ def calcola_boa(dati):
     dati["lat_boa"].valore = round(lat_boa, 3)
     dati["lon_boa"].valore = round(lon_boa, 3)
     
-    print("\n=== Risultato: Posizione della Boa ===")
-    print(f"Lat barca: {round(lat_barca, 3)} | Lon barca: {round(lon_barca, 3)}")
-    print(f"→ Distanza: {round(distanza, 2)} NM | Angolo: {round(angolo_bb, 2)}°")
-    print(f"Lat boa: {round(lat_boa, 3)} | Lon boa: {round(lon_boa, 3)}")
+        import streamlit as st
+    st.write("\n=== Risultato: Posizione della Boa ===")
+        import streamlit as st
+    st.write(f"Lat barca: {round(lat_barca, 3)} | Lon barca: {round(lon_barca, 3)}")
+        import streamlit as st
+    st.write(f"→ Distanza: {round(distanza, 2)} NM | Angolo: {round(angolo_bb, 2)}°")
+        import streamlit as st
+    st.write(f"Lat boa: {round(lat_boa, 3)} | Lon boa: {round(lon_boa, 3)}")
 
 def calcola_corrente(dati):
     vp = dati["vp"].valore
@@ -117,10 +121,14 @@ def calcola_corrente(dati):
 
     dati["vc"].valore =  round(vc, 1)
     dati["dc"].valore = round(dc, 1)
-    print("\n=== Risultato: Corrente Calcolata ===")
-    print(f"VP: {round(vp, 2)} nodi a {round(bussola, 1)}°")
-    print(f"VE: {round(ve, 2)} nodi a {round(sog, 1)}°")
-    print(f"→ Corrente stimata: {round(vc, 2)} nodi da {round(dc, 1)}°")
+        import streamlit as st
+    st.write("\n=== Risultato: Corrente Calcolata ===")
+        import streamlit as st
+    st.write(f"VP: {round(vp, 2)} nodi a {round(bussola, 1)}°")
+        import streamlit as st
+    st.write(f"VE: {round(ve, 2)} nodi a {round(sog, 1)}°")
+        import streamlit as st
+    st.write(f"→ Corrente stimata: {round(vc, 2)} nodi da {round(dc, 1)}°")
 
 def studio_campo(dati):
     lat_barca = dati["lat_barca"].valore
@@ -134,9 +142,12 @@ def studio_campo(dati):
 
     distanza,angolo_bb=calc_distanza(lat_barca, lon_barca, lat_boa,lon_boa)
 
-    print("===== RISULTATI COMPLETI =====")
-    print(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
-    print(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
+        import streamlit as st
+    st.write("===== RISULTATI COMPLETI =====")
+        import streamlit as st
+    st.write(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
+        import streamlit as st
+    st.write(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
   
  
     if in_range(rotta_vera_sx, rotta_vera_dx, angolo_bb):
@@ -167,11 +178,16 @@ def studio_campo(dati):
         intercetto_dx_lat = lat_barca + (dist_layline_dx * math.cos(gradi2radianti(rotta_vera_dx))) / 60
         intercetto_dx_lon = lon_boa + (dist_layline_dx * math.sin(gradi2radianti(rotta_vera_dx))) / (60 * math.cos(gradi2radianti(lat_barca)))
 
-        print(f"Lato sinistro →  Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
-        print(f"Lato destro →  Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
-        print(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
-        print(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 5)}, lon {round(intercetto_sx_lon, 5)}")
-        print(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 5)}, lon {round(intercetto_dx_lon, 5)}")
+                import streamlit as st
+        st.write(f"Lato sinistro →  Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
+                import streamlit as st
+        st.write(f"Lato destro →  Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
+                import streamlit as st
+        st.write(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
+                import streamlit as st
+        st.write(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 5)}, lon {round(intercetto_sx_lon, 5)}")
+                import streamlit as st
+        st.write(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 5)}, lon {round(intercetto_dx_lon, 5)}")
 
     else:
         diff_sx = angolo_360(angolo_bb - rotta_vera_sx)
@@ -182,9 +198,12 @@ def studio_campo(dati):
         tempo_ore = distanza_totale / ve
         ore, minuti = ore_minuti(tempo_ore)
 
-        print(f" Rotta:{round(angolo_bb, 2)}° ")
-        print(f"Ve: {round(ve, 2)} nodi ")
-        print(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
+                import streamlit as st
+        st.write(f" Rotta:{round(angolo_bb, 2)}° ")
+                import streamlit as st
+        st.write(f"Ve: {round(ve, 2)} nodi ")
+                import streamlit as st
+        st.write(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
 
 # Programma 4 (con logica simile)
 def studio_campo_con_vento_e_corrente(dati):
@@ -217,10 +236,14 @@ def studio_campo_con_vento_e_corrente(dati):
     elif in_range(poppa_sx, poppa_dx, angolo_bb): settore = "Poppa"
     elif in_range(poppa_dx, bolina_sx, angolo_bb): settore = "Sx - Mura a Dritta"
  
-    print("===== RISULTATI COMPLETI =====")
-    print(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
-    print(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
-    print(f"Angolo Vento: {angolo_vento}° | Corrente: {vc} nodi da {dc}° ")
+        import streamlit as st
+    st.write("===== RISULTATI COMPLETI =====")
+        import streamlit as st
+    st.write(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
+        import streamlit as st
+    st.write(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
+        import streamlit as st
+    st.write(f"Angolo Vento: {angolo_vento}° | Corrente: {vc} nodi da {dc}° ")
 
     if settore in ["Bolina", "Poppa"]:
         prora_sx = bolina_sx if settore == "Bolina" else poppa_sx
@@ -260,12 +283,18 @@ def studio_campo_con_vento_e_corrente(dati):
             intercetto_dx_lat = lat_barca + (dist_layline_dx * math.cos(gradi2radianti(rotta_vera_dx))) / 60
             intercetto_dx_lon = lon_boa + (dist_layline_dx * math.sin(gradi2radianti(rotta_vera_dx))) / (60 * math.cos(gradi2radianti(lat_barca)))
 
-            print(f"Vai di: {settore}")
-            print(f"Lato sinistro → Prora:{round(prora_sx, 2)}°, Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
-            print(f"Lato destro → Prora:{round(prora_dx, 2)}°, Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
-            print(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza bordi: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
-            print(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 3)}, lon {round(intercetto_sx_lon, 3)}")
-            print(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 3)}, lon {round(intercetto_dx_lon, 3)}")
+                        import streamlit as st
+            st.write(f"Vai di: {settore}")
+                        import streamlit as st
+            st.write(f"Lato sinistro → Prora:{round(prora_sx, 2)}°, Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
+                        import streamlit as st
+            st.write(f"Lato destro → Prora:{round(prora_dx, 2)}°, Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
+                        import streamlit as st
+            st.write(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza bordi: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
+                        import streamlit as st
+            st.write(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 3)}, lon {round(intercetto_sx_lon, 3)}")
+                        import streamlit as st
+            st.write(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 3)}, lon {round(intercetto_dx_lon, 3)}")
 
         else: settore = "Dx - Mura a Sinistra", "Sx - Mura a Dritta"
 
@@ -282,10 +311,14 @@ def studio_campo_con_vento_e_corrente(dati):
         tempo_ore = distanza_totale / ve
         ore, minuti = ore_minuti(tempo_ore)
 
-        print(f"Vai di: {settore}")
-        print(f"Prora: {round(prora_vera, 2)}°, Rotta:{round(angolo_bb, 2)}° ")
-        print(f"Ve: {round(ve, 2)} nodi| Vp: {round(vp, 2)} nodi ")
-        print(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
+                import streamlit as st
+        st.write(f"Vai di: {settore}")
+                import streamlit as st
+        st.write(f"Prora: {round(prora_vera, 2)}°, Rotta:{round(angolo_bb, 2)}° ")
+                import streamlit as st
+        st.write(f"Ve: {round(ve, 2)} nodi| Vp: {round(vp, 2)} nodi ")
+                import streamlit as st
+        st.write(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
 
     
 
@@ -320,10 +353,12 @@ programmi = {
 # === Selezione e input ===
 
 if __name__ == "__main__":
-    print("\n=== Seleziona un programma di calcolo ===")
+        import streamlit as st
+    st.write("\n=== Seleziona un programma di calcolo ===")
     lista_programmi = list(programmi.keys())
     for idx, nome_prog in enumerate(lista_programmi, start=1):
-        print(f"[{idx}] {nome_prog}")
+                import streamlit as st
+        st.write(f"[{idx}] {nome_prog}")
     scelta = input("Scegli un numero (default 1): ").strip()
 
     if scelta == "":
@@ -332,17 +367,20 @@ if __name__ == "__main__":
         try:
             index = int(scelta) - 1
         except ValueError:
-            print("❌ Inserisci un numero valido. Esco.")
+                        import streamlit as st
+            st.write("❌ Inserisci un numero valido. Esco.")
             exit()
 
     if index < 0 or index >= len(lista_programmi):
-        print("❌ Selezione fuori range. Esco.")
+                import streamlit as st
+        st.write("❌ Selezione fuori range. Esco.")
         exit()
 
     nome_selezionato = lista_programmi[index]
     programma = programmi[nome_selezionato]
 
-    print(f"\n=== Inserisci i dati per '{nome_selezionato}' ===")
+        import streamlit as st
+    st.write(f"\n=== Inserisci i dati per '{nome_selezionato}' ===")
     for nome_input in programma["input"]:
         var = defaults[nome_input]
         valore = input(f"{nome_input.replace('_', ' ').capitalize()} [{var.valore}]: ").strip()
@@ -350,10 +388,12 @@ if __name__ == "__main__":
             try:
                 var.valore = float(valore)
             except ValueError:
-                print(f"⚠️ Valore non valido per {nome_input}, mantenuto il precedente.")
+                                import streamlit as st
+                st.write(f"⚠️ Valore non valido per {nome_input}, mantenuto il precedente.")
 
     # === Esecuzione ===
-    print(f"\n⚙️ Eseguo: {nome_selezionato}")
+        import streamlit as st
+    st.write(f"\n⚙️ Eseguo: {nome_selezionato}")
     programma["funzione"](defaults)
 
 
