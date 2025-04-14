@@ -97,10 +97,10 @@ def calcola_boa(dati):
     dati["lat_boa"].valore = round(lat_boa, 3)
     dati["lon_boa"].valore = round(lon_boa, 3)
     
-    st.write("\n=== Risultato: Posizione della Boa ===")
-    st.write(f"Lat barca: {round(lat_barca, 3)} | Lon barca: {round(lon_barca, 3)}")
-    st.write(f"→ Distanza: {round(distanza, 2)} NM | Angolo: {round(angolo_bb, 2)}°")
-    st.write(f"Lat boa: {round(lat_boa, 3)} | Lon boa: {round(lon_boa, 3)}")
+    pst.write("\n=== Risultato: Posizione della Boa ===")
+    pst.write(f"Lat barca: {round(lat_barca, 3)} | Lon barca: {round(lon_barca, 3)}")
+    pst.write(f"→ Distanza: {round(distanza, 2)} NM | Angolo: {round(angolo_bb, 2)}°")
+    pst.write(f"Lat boa: {round(lat_boa, 3)} | Lon boa: {round(lon_boa, 3)}")
 
 def calcola_corrente(dati):
     vp = dati["vp"].valore
@@ -118,10 +118,10 @@ def calcola_corrente(dati):
 
     dati["vc"].valore =  round(vc, 1)
     dati["dc"].valore = round(dc, 1)
-    st.write("\n=== Risultato: Corrente Calcolata ===")
-    st.write(f"VP: {round(vp, 2)} nodi a {round(bussola, 1)}°")
-    st.write(f"VE: {round(ve, 2)} nodi a {round(sog, 1)}°")
-    st.write(f"→ Corrente stimata: {round(vc, 2)} nodi da {round(dc, 1)}°")
+    pst.write("\n=== Risultato: Corrente Calcolata ===")
+    pst.write(f"VP: {round(vp, 2)} nodi a {round(bussola, 1)}°")
+    pst.write(f"VE: {round(ve, 2)} nodi a {round(sog, 1)}°")
+    pst.write(f"→ Corrente stimata: {round(vc, 2)} nodi da {round(dc, 1)}°")
 
 def studio_campo(dati):
     lat_barca = dati["lat_barca"].valore
@@ -135,9 +135,9 @@ def studio_campo(dati):
 
     distanza,angolo_bb=calc_distanza(lat_barca, lon_barca, lat_boa,lon_boa)
 
-    st.write("===== RISULTATI COMPLETI =====")
-    st.write(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
-    st.write(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
+    pst.write("===== RISULTATI COMPLETI =====")
+    pst.write(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
+    pst.write(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
   
  
     if in_range(rotta_vera_sx, rotta_vera_dx, angolo_bb):
@@ -168,11 +168,11 @@ def studio_campo(dati):
         intercetto_dx_lat = lat_barca + (dist_layline_dx * math.cos(gradi2radianti(rotta_vera_dx))) / 60
         intercetto_dx_lon = lon_boa + (dist_layline_dx * math.sin(gradi2radianti(rotta_vera_dx))) / (60 * math.cos(gradi2radianti(lat_barca)))
 
-        st.write(f"Lato sinistro →  Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
-        st.write(f"Lato destro →  Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
-        st.write(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
-        st.write(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 5)}, lon {round(intercetto_sx_lon, 5)}")
-        st.write(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 5)}, lon {round(intercetto_dx_lon, 5)}")
+        pst.write(f"Lato sinistro →  Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
+        pst.write(f"Lato destro →  Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
+        pst.write(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
+        pst.write(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 5)}, lon {round(intercetto_sx_lon, 5)}")
+        pst.write(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 5)}, lon {round(intercetto_dx_lon, 5)}")
 
     else:
         diff_sx = angolo_360(angolo_bb - rotta_vera_sx)
@@ -183,9 +183,9 @@ def studio_campo(dati):
         tempo_ore = distanza_totale / ve
         ore, minuti = ore_minuti(tempo_ore)
 
-        st.write(f" Rotta:{round(angolo_bb, 2)}° ")
-        st.write(f"Ve: {round(ve, 2)} nodi ")
-        st.write(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
+        pst.write(f" Rotta:{round(angolo_bb, 2)}° ")
+        pst.write(f"Ve: {round(ve, 2)} nodi ")
+        pst.write(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
 
 # Programma 4 (con logica simile)
 def studio_campo_con_vento_e_corrente(dati):
@@ -218,10 +218,10 @@ def studio_campo_con_vento_e_corrente(dati):
     elif in_range(poppa_sx, poppa_dx, angolo_bb): settore = "Poppa"
     elif in_range(poppa_dx, bolina_sx, angolo_bb): settore = "Sx - Mura a Dritta"
  
-    st.write("===== RISULTATI COMPLETI =====")
-    st.write(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
-    st.write(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
-    st.write(f"Angolo Vento: {angolo_vento}° | Corrente: {vc} nodi da {dc}° ")
+    pst.write("===== RISULTATI COMPLETI =====")
+    pst.write(f"Barca: lat {round(lat_barca,3)}, lon {round(lon_barca,3)}|Boa:lat {round(lat_boa,3)},long {round(lon_boa,3)}")
+    pst.write(f"Distanza: {round(distanza, 2)}NM| Angolo: {round(angolo_bb, 2)}°")
+    pst.write(f"Angolo Vento: {angolo_vento}° | Corrente: {vc} nodi da {dc}° ")
 
     if settore in ["Bolina", "Poppa"]:
         prora_sx = bolina_sx if settore == "Bolina" else poppa_sx
@@ -261,12 +261,12 @@ def studio_campo_con_vento_e_corrente(dati):
             intercetto_dx_lat = lat_barca + (dist_layline_dx * math.cos(gradi2radianti(rotta_vera_dx))) / 60
             intercetto_dx_lon = lon_boa + (dist_layline_dx * math.sin(gradi2radianti(rotta_vera_dx))) / (60 * math.cos(gradi2radianti(lat_barca)))
 
-            st.write(f"Vai di: {settore}")
-            st.write(f"Lato sinistro → Prora:{round(prora_sx, 2)}°, Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
-            st.write(f"Lato destro → Prora:{round(prora_dx, 2)}°, Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
-            st.write(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza bordi: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
-            st.write(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 3)}, lon {round(intercetto_sx_lon, 3)}")
-            st.write(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 3)}, lon {round(intercetto_dx_lon, 3)}")
+            pst.write(f"Vai di: {settore}")
+            pst.write(f"Lato sinistro → Prora:{round(prora_sx, 2)}°, Rotta:{round(rotta_vera_sx, 2)}°, Ve: {round(ve_sx, 2)} nodi, VMG: {round(vmg_sx, 2)} nodi, → layline: {round(dist_layline_sx, 2)} NM,{ore_sx} ore e {minuti_sx} minuti ")
+            pst.write(f"Lato destro → Prora:{round(prora_dx, 2)}°, Rotta:{round(rotta_vera_dx, 2)}°, Ve: {round(ve_dx, 2)} nodi, VMG: {round(vmg_dx, 2)} nodi, → layline: {round(dist_layline_dx, 2)} NM,{ore_dx} ore e {minuti_dx} minuti ")
+            pst.write(f"Tempo totale stimato: {ore} ore e {minuti} minuti, Distanza bordi: {round((dist_layline_sx+dist_layline_dx), 2)} NM")
+            pst.write(f"Intercetto layline sx: lat {round(intercetto_sx_lat, 3)}, lon {round(intercetto_sx_lon, 3)}")
+            pst.write(f"Intercetto layline dx: lat {round(intercetto_dx_lat, 3)}, lon {round(intercetto_dx_lon, 3)}")
 
         else: settore = "Dx - Mura a Sinistra", "Sx - Mura a Dritta"
 
@@ -283,10 +283,10 @@ def studio_campo_con_vento_e_corrente(dati):
         tempo_ore = distanza_totale / ve
         ore, minuti = ore_minuti(tempo_ore)
 
-        st.write(f"Vai di: {settore}")
-        st.write(f"Prora: {round(prora_vera, 2)}°, Rotta:{round(angolo_bb, 2)}° ")
-        st.write(f"Ve: {round(ve, 2)} nodi| Vp: {round(vp, 2)} nodi ")
-        st.write(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
+        pst.write(f"Vai di: {settore}")
+        pst.write(f"Prora: {round(prora_vera, 2)}°, Rotta:{round(angolo_bb, 2)}° ")
+        pst.write(f"Ve: {round(ve, 2)} nodi| Vp: {round(vp, 2)} nodi ")
+        pst.write(f"Distanza Totale: {round(distanza_totale, 2)} NM|Tempo stimato: {ore} ore e {minuti} minuti")
 
     
 
@@ -319,48 +319,3 @@ programmi = {
 }
 
 # === Selezione e input ===
-st.write("\n=== Seleziona un programma di calcolo ===")
-lista_programmi = list(programmi.keys())
-for idx, nome_prog in enumerate(lista_programmi, start=1):
-    st.write(f"[{idx}] {nome_prog}")
-scelta = input("Scegli un numero (default 1): ").strip()
-
-if scelta == "":
-    index = 0
-else:
-    try:
-        index = int(scelta) - 1
-    except ValueError:
-        st.write("❌ Inserisci un numero valido. Esco.")
-        exit()
-
-if index < 0 or index >= len(lista_programmi):
-    st.write("❌ Selezione fuori range. Esco.")
-    exit()
-
-nome_selezionato = lista_programmi[index]
-programma = programmi[nome_selezionato]
-
-st.write(f"\n=== Inserisci i dati per '{nome_selezionato}' ===")
-for nome_input in programma["input"]:
-    var = defaults[nome_input]
-    valore = input(f"{nome_input.replace('_', ' ').capitalize()} [{var.valore}]: ").strip()
-    if valore != "":
-        try:
-            var.valore = float(valore)
-        except ValueError:
-            st.write(f"⚠️ Valore non valido per {nome_input}, mantenuto il precedente.")
-
-# === Esecuzione ===
-st.write(f"\n⚙️ Eseguo: {nome_selezionato}")
-programma["funzione"](defaults)
-
-
-
-# === Salvataggio ===
-with open(file_input, "w") as f:
-    json.dump({k: v.valore for k, v in defaults.items()}, f, indent=4)
-
-input("\nPremi INVIO per uscire...")
-
-
