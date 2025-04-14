@@ -318,49 +318,51 @@ programmi = {
 }
 
 # === Selezione e input ===
-print("\n=== Seleziona un programma di calcolo ===")
-lista_programmi = list(programmi.keys())
-for idx, nome_prog in enumerate(lista_programmi, start=1):
-    print(f"[{idx}] {nome_prog}")
-scelta = input("Scegli un numero (default 1): ").strip()
 
-if scelta == "":
-    index = 0
-else:
-    try:
-        index = int(scelta) - 1
-    except ValueError:
-        print("❌ Inserisci un numero valido. Esco.")
+if __name__ == "__main__":
+    print("\n=== Seleziona un programma di calcolo ===")
+    lista_programmi = list(programmi.keys())
+    for idx, nome_prog in enumerate(lista_programmi, start=1):
+        print(f"[{idx}] {nome_prog}")
+    scelta = input("Scegli un numero (default 1): ").strip()
+
+    if scelta == "":
+        index = 0
+    else:
+        try:
+            index = int(scelta) - 1
+        except ValueError:
+            print("❌ Inserisci un numero valido. Esco.")
+            exit()
+
+    if index < 0 or index >= len(lista_programmi):
+        print("❌ Selezione fuori range. Esco.")
         exit()
 
-if index < 0 or index >= len(lista_programmi):
-    print("❌ Selezione fuori range. Esco.")
-    exit()
+    nome_selezionato = lista_programmi[index]
+    programma = programmi[nome_selezionato]
 
-nome_selezionato = lista_programmi[index]
-programma = programmi[nome_selezionato]
+    print(f"\n=== Inserisci i dati per '{nome_selezionato}' ===")
+    for nome_input in programma["input"]:
+        var = defaults[nome_input]
+        valore = input(f"{nome_input.replace('_', ' ').capitalize()} [{var.valore}]: ").strip()
+        if valore != "":
+            try:
+                var.valore = float(valore)
+            except ValueError:
+                print(f"⚠️ Valore non valido per {nome_input}, mantenuto il precedente.")
 
-print(f"\n=== Inserisci i dati per '{nome_selezionato}' ===")
-for nome_input in programma["input"]:
-    var = defaults[nome_input]
-    valore = input(f"{nome_input.replace('_', ' ').capitalize()} [{var.valore}]: ").strip()
-    if valore != "":
-        try:
-            var.valore = float(valore)
-        except ValueError:
-            print(f"⚠️ Valore non valido per {nome_input}, mantenuto il precedente.")
-
-# === Esecuzione ===
-print(f"\n⚙️ Eseguo: {nome_selezionato}")
-programma["funzione"](defaults)
+    # === Esecuzione ===
+    print(f"\n⚙️ Eseguo: {nome_selezionato}")
+    programma["funzione"](defaults)
 
 
 
-# === Salvataggio ===
-with open(file_input, "w") as f:
-    json.dump({k: v.valore for k, v in defaults.items()}, f, indent=4)
+    # === Salvataggio ===
+    with open(file_input, "w") as f:
+        json.dump({k: v.valore for k, v in defaults.items()}, f, indent=4)
 
-input("\nPremi INVIO per uscire...")
+    input("\nPremi INVIO per uscire...")
 
 
 
