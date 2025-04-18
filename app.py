@@ -1,23 +1,21 @@
-
 import streamlit as st
-from rotta_barca_varie_funzioni_3 import defaults, programmi
+from rotta import defaults, programmi
 
 st.set_page_config(page_title="Rotta Barca", layout="centered")
 st.title("⛵️ Calcoli Rotta Barca")
 
 scelte = list(programmi.keys())
-scelta = st.selectbox("Scegli un programma di calcolo:", scelte)
-programma = programmi[scelta]
+scelta = st.selectbox("Scegli un programma:", scelte)
+prog = programmi[scelta]
 
-st.subheader("📥 Inserisci i dati")
-for nome_input in programma["input"]:
-    var = defaults[nome_input]
-    valore = st.number_input(f"{nome_input.replace('_', ' ').capitalize()}", value=float(var.valore))
-    var.valore = valore
+st.subheader("Inserisci i dati")
+for key in prog["input"]:
+    var = defaults[key]
+    val = st.number_input(key.replace("_", " ").capitalize(), value=var.valore)
+    var.valore = val
 
 if st.button("Calcola"):
-    st.subheader("📤 Risultati")
-    try:
-        programma["funzione"](defaults)
-    except Exception as e:
-        st.error(f"Errore durante l'esecuzione: {e}")
+    prog["funzione"](defaults)
+    st.subheader("Risultati")
+    for out in prog["output"]:
+        st.write(f"{out.replace('_',' ').capitalize()}: {defaults[out].valore}")
